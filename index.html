@@ -38,9 +38,9 @@
                 </div>
             </div>
             <div class="content-lead">
-                <form action="" method="post">
+                <form id="form_contact" method="post">
                     <div class="content-lead-input">
-                        <input type="text" name="" id="" placeholder="Digite seu celular">
+                        <input type="text" name="contact" placeholder="Digite seu celular">
                         <input type="submit" value="CRIAR MEU SITE HOJE!">
                     </div>
                 </form>
@@ -50,3 +50,38 @@
     <section id="footer"></section>
 </body>
 </html>
+
+<script type="module" async>
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+    const response       = await fetch("./firebase.json");
+    const person         = await response.text();
+    const firebaseConfig = JSON.parse(person);
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    const formContact = document.querySelector("#form_contact");
+    formContact.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData    = new FormData(formContact);
+        const contact     = formData.get('contact');
+        const currentDate = new Date();
+
+        if(!contact.trim()){
+            alert("Para prosseguir, por favor, forneça o seu contato!")
+            return false;
+        }
+
+        try {
+            const docRef = await addDoc(collection(db, "contacts"), { contact: contact, date: currentDate });
+            console.log(docRef)
+            alert("Conseguimos salvar o seu contato. Por favor, aguarde um retorno em até 24h.");
+            window.location.reload();
+        } catch (e) {
+            alert("Desculpe, não conseguimos salvar o seu contato. Por favor, tente novamente mais tarde.");
+        }
+    })
+</script>
