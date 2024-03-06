@@ -76,8 +76,7 @@
         }
 
         try {
-            const docRef = await addDoc(collection(db, "contacts"), { contact: contact, date: currentDate });
-            console.log(docRef)
+            await addDoc(collection(db, "contacts"), { contact: contact, date: currentDate });
             alert("Conseguimos salvar o seu contato. Por favor, aguarde um retorno em até 24h.");
             window.location.reload();
         } catch (e) {

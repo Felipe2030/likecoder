@@ -161,7 +161,7 @@ body {
 
     /* Ajustes de layout do conteúdo principal */
     #content {
-        padding: 0px 40px;
+        padding: 0px 0px;
     }
 
     /* Mostrar apenas uma postagem na tela pequena */
@@ -190,20 +190,37 @@ body {
 
     /* Ajuste de tamanho da fonte para telas pequenas */
     #content .content-info .content-info-title span {
-        font-size: 1.6em;
+        font-size: 1.2em;
+    }
+
+    #content .content-info .content-info-title,
+    #content .content-info .content-info-descrition,
+    #content .content-info .content-info-subtitle {
+        padding: 0px 40px;
     }
 
     #content .content-info .content-info-subtitle span {
-        font-size: 1.4em;
+        font-size: 1em;
     }
 
     #content .content-info .content-info-descrition span {
-        font-size: 1.4em;
+        font-size: 1em;
     }
 
     /* Margem inferior para o campo de entrada na tela pequena */
     #content .content-lead-input {
         margin-bottom: 40px;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #content .content-lead-input input {
+        border: 0;
+        border-radius: 5px;
+        padding: 14px;
+        font-size: 0.8em;
     }
 }
 
